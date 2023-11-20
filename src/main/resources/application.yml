@@ -4,4 +4,3 @@ spring:
   config:
     import:
       - optional:file:/run/secrets/database_config.yml
-      - optional:file:/run/secrets/jwt_config.yml
