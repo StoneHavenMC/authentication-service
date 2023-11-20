@@ -1,5 +1,6 @@
 package fr.stonehaven.authentication.configuration;
 
+import fr.stonehaven.authentication.exception.auth.InvalidTokenException;
 import fr.stonehaven.authentication.service.JWTService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -47,7 +48,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 );
                 authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 SecurityContextHolder.getContext().setAuthentication(authenticationToken);
-            } catch (UsernameNotFoundException e) {
+            } catch (InvalidTokenException | UsernameNotFoundException e) {
                 filterChain.doFilter(request, response);
                 return;
             }
