@@ -6,3 +6,7 @@ spring:
   config:
     import:
       - optional:file:/run/secrets/database_config.yml
+
+  datasource:
+    hikari:
+      maximum-pool-size: 5
