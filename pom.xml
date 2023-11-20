@@ -87,4 +87,11 @@
         </plugins>
     </build>
 
+    <distributionManagement>
+        <repository>
+            <id>nexus-grayroot</id>
+            <url>https://nexus.grayroot.eu/repository/maven-snapshots/</url>
+        </repository>
+    </distributionManagement>
+
 </project>
