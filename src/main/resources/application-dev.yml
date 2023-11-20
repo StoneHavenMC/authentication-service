@@ -21,8 +21,14 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
+
 jwt:
   duration: 86_400_000 # 1 Day in miliseconds
   rsa:
     public: "dev_public.der"
     private: "dev_private.der"
+
+eureka:
+  client:
+    service-url:
+      defaultZone : http://localhost:8079/eureka/

@@ -3,3 +3,8 @@ jwt:
   rsa:
     public: "/run/secrets/jwt-public-key"
     private: "/run/secrets/jwt-private-key"
+
+eureka:
+  client:
+    service-url:
+      defaultZone : http://service-registry:8079/eureka/
