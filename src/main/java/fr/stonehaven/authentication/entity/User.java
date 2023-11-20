@@ -1,5 +1,6 @@
 package fr.stonehaven.authentication.entity;
 
+import fr.stonehaven.authentication.enums.UserRoles;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,4 +18,7 @@ public class User {
     private String name;
     private String email;
     private String password;
+
+    @Enumerated(EnumType.STRING)
+    private UserRoles role = UserRoles.USER;
 }

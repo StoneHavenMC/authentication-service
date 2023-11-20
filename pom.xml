@@ -10,7 +10,7 @@
     </parent>
     <groupId>fr.stonehaven</groupId>
     <artifactId>authentication-service</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.1-SNAPSHOT</version>
     <name>authentication-service</name>
     <description>authentication-service</description>
     <properties>
@@ -80,20 +80,23 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
                 <configuration>
                     <finalName>application</finalName>
-                    <image>
-                        <builder>paketobuildpacks/builder-jammy-base:latest</builder>
-                    </image>
-                    <excludes>
-                        <exclude>
-                            <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok</artifactId>
-                        </exclude>
-                    </excludes>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
                 </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

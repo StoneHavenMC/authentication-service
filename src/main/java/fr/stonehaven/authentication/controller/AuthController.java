@@ -2,7 +2,7 @@ package fr.stonehaven.authentication.controller;
 
 import fr.stonehaven.authentication.api.request.auth.AuthenticationRequest;
 import fr.stonehaven.authentication.api.response.auth.AuthenticationTokenResponse;
-import fr.stonehaven.authentication.api.response.user.TUserResponse;
+import fr.stonehaven.authentication.api.response.user.UserResponse;
 import fr.stonehaven.authentication.entity.User;
 import fr.stonehaven.authentication.exception.UserNotFoundException;
 import fr.stonehaven.authentication.service.auth.IAuthService;
@@ -13,6 +13,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 @RequiredArgsConstructor
 @RestController
@@ -29,12 +31,15 @@ public class AuthController {
         return ResponseEntity.ok(new AuthenticationTokenResponse(token, start));
     }
 
-    @GetMapping(value = "/user", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<TUserResponse> getUser(Authentication authentication) throws UserNotFoundException {
-        final long start = System.currentTimeMillis();
+    @GetMapping(value = "/verify", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Map<String, Boolean> verify() {
+        return Map.of("authenticated", true);
+    }
 
+    @GetMapping(value = "/user", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<UserResponse> getUser(Authentication authentication) throws UserNotFoundException {
         String email = authentication.getName();
         User user = userService.getUserByEmail(email);
-        return ResponseEntity.ok(new TUserResponse(user, start));
+        return ResponseEntity.ok(new UserResponse(user));
     }
 }
