@@ -1,0 +1,5 @@
+jwt:
+  duration: 86_400_000 # 1 Day in miliseconds
+  rsa:
+    public: "/run/secrets/jwt-private-key"
+    private: "/run/secrets/jwt-private-key"
