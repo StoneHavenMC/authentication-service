@@ -30,17 +30,20 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
 
-      - name: Build with Maven
-        run: mvn -B package deploy -s $GITHUB_WORKSPACE/settings.xml
-        env:
-          NEXUS_USERNAME: ${{ secrets.NEXUS_USERNAME }}
-          NEXUS_PASSWORD: ${{ secrets.NEXUS_PASSWORD }}
+      - uses: s4u/maven-settings-action@v3.0.0
+        with:
+          servers: |
+            [{
+                "id": "nexus-grayroot",
+                "username": "${{ secrets.NEXUS_USERNAME }}",
+                "password": "${{ secrets.NEXUS_PASSWORD }}"
+            }]
 
-      - name: Build the Docker image
-        run: docker build . --file Dockerfile --tag grayr0ot/sh-authentication-service:latest
+      - name: Deploy to nexus
+        run: mvn -B deploy
 
-      - name: Log in to Docker Hub
-        run: docker login --username ${{ secrets.DOCKERHUB_USERNAME }} --password ${{ secrets.DOCKERHUB_TOKEN }}
-
-      - name: Push the Docker image to Docker Hub
-        run: docker push grayr0ot/sh-authentication-service:latest
+      - name: Push the Docker image to Github registry
+        run: |
+          docker login --username grayr0ot --password ${{secrets.GHCR_PASSWORD}} ghcr.io
+          docker build . --tag ghcr.io/grayr0ot/sh-authentication-service:prod
+          docker push ghcr.io/grayr0ot/sh-authentication-service:prod

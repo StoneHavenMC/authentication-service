@@ -1,15 +1,16 @@
 package fr.stonehaven.authentication.repository;
 
-import fr.stonehaven.authentication.entity.User;
-import org.springframework.data.jpa.repository.JpaRepository;
+import fr.stonehaven.authentication.entity.DBUser;
+import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, String> {
+public interface UserRepository extends MongoRepository<DBUser, UUID> {
 
-    Optional<User> findByName(String name);
+    Optional<DBUser> findByName(String name);
 
-    Optional<User> findByEmail(String email);
+    Optional<DBUser> findByEmail(String email);
 }
