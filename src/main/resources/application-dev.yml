@@ -1,26 +1,14 @@
 server:
   port: 8081
 spring:
-  datasource:
-    url: ${DATABASE_URL}
-    username: ${DATABASE_USERNAME}
-    password: ${DATABASE_PASSWORD}
-    driverClassName: org.postgresql.Driver
-    hikari:
-      max-lifetime: 600
-
-  sql:
-    init:
-      mode: always
-
-  jpa:
-    hibernate:
-      ddl-auto: update
-      naming:
-        physical-strategy: org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
+  data:
+    mongodb:
+      host: ${MONGO_HOST}
+      port: ${MONGO_PORT}
+      authentication-database: ${MONGO_AUTH_DB}
+      database: ${MONGO_DB}
+      username: ${MONGO_USERNAME}
+      password: ${MONGO_PASSWORD}
 
 jwt:
   duration: 86_400_000 # 1 Day in miliseconds
@@ -31,4 +19,4 @@ jwt:
 eureka:
   client:
     service-url:
-      defaultZone : http://localhost:8761/eureka/
+      defaultZone: http://localhost:8761/eureka/

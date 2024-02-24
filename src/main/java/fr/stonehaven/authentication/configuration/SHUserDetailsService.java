@@ -1,6 +1,6 @@
 package fr.stonehaven.authentication.configuration;
 
-import fr.stonehaven.authentication.entity.User;
+import fr.stonehaven.authentication.entity.DBUser;
 import fr.stonehaven.authentication.exception.UserNotFoundException;
 import fr.stonehaven.authentication.service.user.IUserService;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -20,7 +20,7 @@ public class SHUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         try {
-            User user = userService.getUserByEmail(email);
+            DBUser user = userService.getUserByEmail(email);
             return new SHUserDetails(user.getEmail(), user.getPassword());
         } catch (UserNotFoundException e) {
             throw new UsernameNotFoundException(e.getMessage(), e.getCause());

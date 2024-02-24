@@ -1,9 +1,9 @@
 package fr.stonehaven.authentication.service.user;
 
-import fr.stonehaven.authentication.entity.User;
+import fr.stonehaven.authentication.entity.DBUser;
 import fr.stonehaven.authentication.exception.UserNotFoundException;
 
 public interface IUserService {
 
-    User getUserByEmail(String email) throws UserNotFoundException;
+    DBUser getUserByEmail(String email) throws UserNotFoundException;
 }

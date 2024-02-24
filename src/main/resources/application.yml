@@ -5,8 +5,4 @@ spring:
     active: prod
   config:
     import:
-      - optional:file:/run/secrets/database_config.yml
-
-  datasource:
-    hikari:
-      maximum-pool-size: 5
+      - optional:file:/run/secrets/mongo_database_config.yml

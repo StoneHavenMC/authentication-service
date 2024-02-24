@@ -3,7 +3,7 @@ package fr.stonehaven.authentication.controller;
 import fr.stonehaven.authentication.api.request.auth.AuthenticationRequest;
 import fr.stonehaven.authentication.api.response.auth.AuthenticationTokenResponse;
 import fr.stonehaven.authentication.api.response.user.UserResponse;
-import fr.stonehaven.authentication.entity.User;
+import fr.stonehaven.authentication.entity.DBUser;
 import fr.stonehaven.authentication.exception.UserNotFoundException;
 import fr.stonehaven.authentication.service.auth.IAuthService;
 import fr.stonehaven.authentication.service.user.IUserService;
@@ -39,7 +39,7 @@ public class AuthController {
     @GetMapping(value = "/user", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<UserResponse> getUser(Authentication authentication) throws UserNotFoundException {
         String email = authentication.getName();
-        User user = userService.getUserByEmail(email);
+        DBUser user = userService.getUserByEmail(email);
         return ResponseEntity.ok(new UserResponse(user));
     }
 }
