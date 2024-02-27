@@ -10,7 +10,6 @@ import fr.stonehaven.authentication.service.user.IUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,9 +17,8 @@ import java.util.Map;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/auth")
+@RequestMapping()
 public class AuthController {
-    private final AuthenticationManager authenticationManager;
     private final IAuthService authService;
     private final IUserService userService;
 
